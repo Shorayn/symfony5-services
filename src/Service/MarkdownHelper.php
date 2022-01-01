@@ -2,11 +2,25 @@
 
 namespace App\Service;
 
-class MarkdownHelper {
-    public function parse ($src) : string {
+use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 
-        return $cache->get('markdown_'.md5($src), function() use ($src, $markdownParser) {
-            return $markdownParser->transformMarkdown($src);
+class MarkdownHelper {
+
+    private $markdownParser;
+    private $cache;
+    
+    public function __construct(MarkdownParserInterface $markdownParser, CacheInterface $cache)
+    {
+        $this->markdownParser = $markdownParser;
+        $this->cache = $cache;
+    }
+
+
+    public function parse (string $src) : string {
+
+        return $this->cache->get('markdown_'.md5($src), function() use ($src) {
+            return $this->markdownParser->transformMarkdown($src);
         });
     }
 
