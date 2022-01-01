@@ -29,7 +29,7 @@ class QuestionController extends AbstractController
     /**
      * @Route("/questions/{slug}", name="app_question_show")
      */
-    public function show($slug, MarkdownParserInterface $markdownParser,CacheInterface $cache)
+    public function show($slug, MarkdownParserInterface $markdownParser, CacheInterface $cache)
     {
         $answers = [
             'Make sure your cat is sitting `purrrfectly` still 🤣',
@@ -42,7 +42,7 @@ class QuestionController extends AbstractController
             return $markdownParser->transformMarkdown($questionText);
         });
     
-        dd($markdownParser);
+        dump($cache);
         
         return $this->render('question/show.html.twig', [
             'question' => ucwords(str_replace('-', ' ', $slug)),
