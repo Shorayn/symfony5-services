@@ -33,7 +33,6 @@ class QuestionController extends AbstractController
 
         return new Response($html);
         */
-
         return $this->render('question/homepage.html.twig');
     }
 
