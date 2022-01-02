@@ -28,3 +28,4 @@ class CommentController extends AbstractController
         return $this->json(['votes' => $currentVoteCount]);
     }
 }
+    
